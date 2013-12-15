@@ -10,6 +10,11 @@ setup(
     description='Cytocurrency research & expirements',
     license='GPL 3',
     py_modules=['cclab'],
+    entry_points = {
+        'console_scripts': [
+            'cclab-history = cclab.trade.history:main',
+        ]
+    },
     long_description=open('README.rst').read(),
     classifiers=[
         'Development Status :: 3 - Alpha',
