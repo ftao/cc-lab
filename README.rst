@@ -1,4 +1,4 @@
 cc-lab
 ============
 
-cryptocurrency (bitcoin) related research & expirements . 
+cryptocurrency (bitcoin) related research & experiments . 

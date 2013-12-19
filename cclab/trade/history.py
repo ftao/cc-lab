@@ -8,7 +8,7 @@ Options:
   -m <market> --market <market>  Market name to fetch data from
   -o <output> --output <output>  Output file [default:-]
   -s <since> --since <since>     Fetch data after since
-  -v --verbose  Be verbose, more logging
+  -v --verbose                   Be verbose, more logging
 
 '''
 
@@ -18,7 +18,7 @@ import logging
 
 from docopt import docopt
 
-from cclab.trade.common import setup_logging
+from cclab.trade.common import setup_logging, read_last_line
 from cclab.trade.markets.btcchina import BtcChinaMarket
 
 def dump(path, records):
@@ -41,8 +41,18 @@ def fetch(since=0):
             break
         for item in trades:
             yield item
-        since = trades[-1]['id']
         logging.debug("fetch %d records since %s", len(trades), since)
+        since = trades[-1]['id']
+
+def find_last_id(output):
+    if output == '-':
+        return 0
+    else:
+        try:
+            with open(output, 'rb') as fp:
+                return json.loads(read_last_line(fp))['id']
+        except:
+            return 0
 
 def main():
     args = docopt(__doc__, help=True)
@@ -55,7 +65,7 @@ def main():
         setup_logging(False)
 
     if since is None:
-        since = 0
+        since = find_last_id(output)
     else:
         since = int(since)
 

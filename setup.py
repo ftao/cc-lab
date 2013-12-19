@@ -7,7 +7,7 @@ setup(
     version=__version__,
     author='Tao Fei',
     author_email='filia.tao@gmail.com',
-    description='Cytocurrency research & expirements',
+    description='Cytocurrency research & experiments',
     license='GPL 3',
     py_modules=['cclab'],
     entry_points = {
